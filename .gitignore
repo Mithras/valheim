@@ -1,0 +1,5 @@
+/data
+/config/backups
+/config/worlds_local
+/config/prefs
+/.env

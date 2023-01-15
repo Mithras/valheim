@@ -1,0 +1,24 @@
+services: 
+  valheim: 
+    image: ghcr.io/lloesche/valheim-server
+    cap_add:
+      - sys_nice
+    environment:
+      - SERVER_NAME=Mithras Server
+      - WORLD_NAME=shared
+      - SERVER_PASS=${SERVER_PASS}
+      - SERVER_PUBLIC=false
+      - TZ=America/Los_Angeles
+      - VALHEIM_PLUS=true
+      - SUPERVISOR_HTTP=true
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes: 
+      - ./config:/config
+      - ./data:/opt/valheim
+      - /etc/localtime:/etc/localtime:ro
+    ports: 
+      - 2456-2457:2456-2457/udp
+      - 9001:9001
+    restart: unless-stopped
+    stop_grace_period: 2m
